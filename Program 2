@@ -1,0 +1,110 @@
+/*LINEAR SEARCH*/
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<time.h>
+void main()
+{
+    int ele,n;
+    time_t start,end;
+    printf("Enter the number of elements:\n");
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        arr[i]=rand();
+    }
+    printf("The elements in the array are:\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\n",arr[i]);
+    }
+    printf("Enter the element to be searched:\n");
+    scanf("%d",&ele);
+    int flag=0;
+    start=time(NULL);
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==ele)
+        {
+            flag=1;
+            break;
+        }
+    }
+    if(flag==1)
+    {
+        printf("Element is found in the array\n");
+    }
+    else
+        printf("Element is not found in the array\n");
+        end=time(NULL);
+        printf("Time taken for search is:%f",difftime(end,start));
+}
+
+/*BINARY SEARCH*/
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+void main()
+{
+    int a[1000],t,n;
+    time_t start,ed;
+    int beg=0,end=9;
+    int mid;
+    int ele,flag=0;
+    printf("Enter the number of elements:\n");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        a[i]=rand()%n+1;
+    }
+    for(int p=0;p<n;p++)
+    {
+        for(int q=0;q<n;q++)
+        {
+            if(a[q]>a[q+1])
+            {
+                t=a[q];
+                a[q]=a[q+1];
+                a[q+1]=t;
+            }
+        }
+    }
+    printf("The %d elements are:\n",n);
+    for(int k=0;k<n;k++)
+    {
+        printf("%d\n",a[k]);
+    }
+    start=time(NULL);
+    printf("Enter element to search:\n");
+    scanf("%d",&ele);
+    while(beg<=end)
+    {
+        mid=(beg+end)/2;
+        if(a[mid]==ele)
+        {
+            printf("\nElement found");
+            flag=1;
+            break;
+        }
+        if(ele>a[mid])
+        {
+            beg=mid+1;
+        }
+        if(ele<a[mid])
+        {
+            end=mid-1;
+        }
+    }
+    if(flag==0)
+    {
+        printf("Element not found");
+    }
+    ed=time(NULL);
+    printf("\nTime taken=%f",difftime(ed,start));
+    return 0;
+}
