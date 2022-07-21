@@ -32,3 +32,8 @@ int main(){
     end=clock();
     printf("Time taken=%f",(double)(end-start)/CLOCKS_PER_SEC);
 }
+1000	0.400086
+2000	1.620606
+3000	3.674011
+4000	6.49893
+5000	10.22278
