@@ -1,58 +1,43 @@
-#include <stdio.h>
-#include<time.h>
+#include<stdio.h>
 #include<stdlib.h>
-int bin(int arr[], int l, int r, int x)
-{
-    for(int p = 0;p<10000000;p++);
-if (r >= l)
-{
-		int mid = l + (r - l)/2;
-		if (arr[mid] == x) return mid;
-		if (arr[mid] > x) return bin(arr, l, mid-1, x);
-		return bin(arr, mid+1, r, x);
+#include<time.h>
+void delay(){
+    int i,n;
+    for(i=0;i<500000;i++)
+        n=3000/13;
 }
-return -1;
+int binarySearch(int a[],int l,int r,int key){
+    delay();
+    int indx;
+    if(r>=l){
+        
+        int m=l+(r-l)/2;
+        if(a[m]==key)
+            return m;
+        else if(key<a[m])
+            indx=binarySearch(a,l,m-1,key);
+        else
+            indx=binarySearch(a,m+1,r,key);
+    }
+    else return -1;
+    
 }
-int main()
-{
-    int a[1000],ele,t;
- for(int i = 0;i<1000;i++)
-    {
-        a[i] = rand()%100000 + 1;
-    }
 
-    for(int p=0;p<1000;p++)
-    {
-        for(int q = 0;q<1001;q++)
-        {
-            if(a[q]>a[q+1])
-            {
-                t = a[q];
-                a[q] = a[q+1];
-                a[q+1] = t;
-            }
-        }
-    }
-    for(int k = 0;k<1000;k++)
-    {
-        printf("%d,",a[k]);
-    }
-int n = sizeof(a)/ sizeof(a[0]);
-printf("\n ENTER ELEMENT TO SEARCH \n");
-scanf("%d",&ele);
-time_t st,ed;
-st = time(NULL);
-int result = bin(a, 0, n-1, ele);
-if(result == -1)
-    {
-        printf("Element is not present in array");
-    }
-else
-    {
-    printf("Element is present at index %d", result);
-    }
-    ed = time(NULL);
-
-    printf("\n TIME TAKEN = %f", difftime(ed,st));
-return 0;
+void main(){
+    clock_t start,end;
+    int n=5000;
+    int arr[n];
+    for(int i=0;i<n;i++)
+        arr[i]=i;
+    int key;
+    printf("Enter key:");
+    scanf("%d",&key);
+    start=clock();
+    int idx=binarySearch(arr,0,n-1,key);
+    end=clock();
+    if(idx!=-1)
+        printf("Element found at index %d",idx);
+    else
+        printf("Element not found");
+    printf("\nTime=%f",(double)(end-start)/CLOCKS_PER_SEC);
 }
