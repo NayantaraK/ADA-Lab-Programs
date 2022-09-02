@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+int G[10][10];
+int V;
+int minKEY(int key[],int visited[]){
+        int min=999;
+        int min_index;
+        for(int v=0;v<V;v++){
+            if(visited[v]==0&&key[v]<min){
+                min=key[v];
+                min_index=v;
+            }
+        }
+        return min_index;
+}
+
+void printMST(int parent[]){
+    printf("\nEdge\tWeight");
+    for(int i=1;i<V;i++){
+        printf("\n%d-%d\t%d",parent[i],i,G[i][parent[i]]);
+    }
+}
+
+void prim(){
+    int parent[V];
+    int key[V];
+    int visited[V];
+    
+    for(int i=0;i<V;i++){
+        key[i]=999;
+        visited[i]=0;
+    }
+    key[0]=0;
+    parent[0]=-1;
+    
+    for(int i=0;i<V-1;i++){
+       int u=minKEY(key,visited);
+       visited[u]=1;
+       
+       for(int v=0;v<V;v++){
+           if(G[u][v]&&visited[v]==0&&G[u][v]<key[v]){
+               parent[v]=u;
+               key[v]=G[u][v];
+           }
+       }
+    }
+    printMST(parent);
+}
+
+
+void main(){
+    printf("Enter number of vertices:");
+    scanf("%d",&V);
+    printf("Enter adjacency matrix:");
+    for(int i=0;i<V;i++){
+        for(int j=0;j<V;j++)
+        scanf("%d",&G[i][j]);
+    }
+    prim();
+}
