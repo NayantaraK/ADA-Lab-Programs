@@ -46,7 +46,9 @@ void main(){
     int arr[N];
     for(i=0;i<N;i++)
         arr[i]=rand()%(N+1);
+    start=clock();
     heapsort(arr,N);
+    end=clock();
     printf("Sorted array:");
     for(i=0;i<N;i++){
         printf("%d\t",arr[i]);
